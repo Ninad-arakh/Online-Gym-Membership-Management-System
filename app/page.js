@@ -1,6 +1,5 @@
 "use client";
 
-import Dashboard from "@/components/Dashboard";
 import MemberDashboard from "@/components/MemberDashboard";
 import { SidebarDemo } from "@/components/Sidebar-Demo";
 import { LoaderOne } from "@/components/ui/loader";

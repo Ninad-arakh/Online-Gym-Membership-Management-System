@@ -17,11 +17,12 @@ const MembershipPlans = ({ user }) => {
 
       handler: async function (response) {
         try {
+          console.log("handler response : ", response)
           const paymentResponse  = await axios.post("/api/payment/verify", response);
           console.log("paymentResponse : ", paymentResponse)
           window.location.href = "/ninad";
         } catch (err) {
-          console.error(err);
+          console.log(err);
           alert("Payment verification failed");
         }
       },

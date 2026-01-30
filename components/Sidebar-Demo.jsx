@@ -123,7 +123,7 @@ export function SidebarDemo({ user, children }) {
 export const Logo = () => {
   return (
     <a
-      href="#"
+      href="/"
       className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
     >
       <motion.span
