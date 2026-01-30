@@ -1,6 +1,7 @@
-"use client"
-import React, { useState } from "react"
-import axios from "axios"
+"use client";
+import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "sonner";
 
 const SPECIALIZATIONS = [
   "Weight Training",
@@ -9,7 +10,7 @@ const SPECIALIZATIONS = [
   "CrossFit",
   "Zumba",
   "Functional Training",
-]
+];
 
 const CreateNewTrainerComponent = () => {
   const [trainerForm, setTrainerForm] = useState({
@@ -17,18 +18,17 @@ const CreateNewTrainerComponent = () => {
     gender: "",
     specialization: [],
     experienceYears: "",
-  })
+  });
 
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setTrainerForm((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSpecializationChange = (value) => {
     setTrainerForm((prev) => ({
@@ -36,13 +36,12 @@ const CreateNewTrainerComponent = () => {
       specialization: prev.specialization.includes(value)
         ? prev.specialization.filter((item) => item !== value)
         : [...prev.specialization, value],
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
+    e.preventDefault();
+    setLoading(true);
 
     try {
       await axios.post(
@@ -51,60 +50,65 @@ const CreateNewTrainerComponent = () => {
           ...trainerForm,
           experienceYears: Number(trainerForm.experienceYears),
         },
-        {
-          withCredentials: true,
-        }
-      )
+        { withCredentials: true }
+      );
 
-      // optional reset after success
+      toast.success("Trainer created successfully");
+
       setTrainerForm({
         name: "",
         gender: "",
         specialization: [],
         experienceYears: "",
-      })
+      });
     } catch (err) {
-      setError(
+      toast.error(
         err?.response?.data?.message || "Failed to create trainer"
-      )
+      );
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-4 sm:p-6">
-      <h2 className="text-2xl font-semibold mb-6">Create New Trainer</h2>
-
+    <div className="flex min-h-screen w-full items-center justify-center bg-linear-to-br from-black via-red-600/70 to-black px-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white dark:bg-zinc-900 rounded-xl shadow p-4 sm:p-6 space-y-6"
+        className="w-full max-w-xl rounded-2xl bg-neutral-900 p-6 md:p-8 shadow-2xl space-y-6"
       >
-        {/* Name */}
+        <h2 className="text-2xl font-bold text-white text-center">
+          Create New Trainer
+        </h2>
+
+        {/* Trainer Name */}
         <div>
-          <label className="block text-sm font-medium mb-1">Trainer Name</label>
+          <label className="block text-sm text-neutral-400 mb-1">
+            Trainer Name
+          </label>
           <input
             type="text"
             name="name"
             value={trainerForm.name}
             onChange={handleChange}
-            className="w-full rounded-lg border px-3 py-2"
             required
+            className="w-full rounded-lg bg-black/40 border border-white/10 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
           />
         </div>
 
-        {/* Gender + Experience */}
+        {/* Gender & Experience */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Gender</label>
+            <label className="block text-sm text-neutral-400 mb-1">
+              Gender
+            </label>
             <select
               name="gender"
               value={trainerForm.gender}
               onChange={handleChange}
-              className="w-full rounded-lg border px-3 py-2"
               required
+              className="w-full rounded-lg bg-black/40 border border-white/10 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
             >
-              <option value="">Select gender</option>
+              <option value="">Select</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -112,57 +116,59 @@ const CreateNewTrainerComponent = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">
+            <label className="block text-sm text-neutral-400 mb-1">
               Experience (Years)
             </label>
             <input
               type="number"
-              name="experienceYears"
               min="0"
+              name="experienceYears"
               value={trainerForm.experienceYears}
               onChange={handleChange}
-              className="w-full rounded-lg border px-3 py-2"
               required
+              className="w-full rounded-lg bg-black/40 border border-white/10 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
             />
           </div>
         </div>
 
         {/* Specializations */}
         <div>
-          <label className="block text-sm font-medium mb-2">
-            Specialization
+          <label className="block text-sm text-neutral-400 mb-2">
+            Specializations
           </label>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {SPECIALIZATIONS.map((spec) => (
-              <label key={spec} className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={trainerForm.specialization.includes(spec)}
-                  onChange={() => handleSpecializationChange(spec)}
-                />
-                {spec}
-              </label>
-            ))}
+          <div className="flex flex-wrap gap-2">
+            {SPECIALIZATIONS.map((spec) => {
+              const active = trainerForm.specialization.includes(spec);
+              return (
+                <button
+                  type="button"
+                  key={spec}
+                  onClick={() => handleSpecializationChange(spec)}
+                  className={`rounded-full px-3 py-1 text-sm transition
+                    ${
+                      active
+                        ? "bg-red-600 text-white"
+                        : "bg-white/10 text-neutral-300 hover:bg-white/20"
+                    }`}
+                >
+                  {spec}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {error && (
-          <p className="text-sm text-red-600">{error}</p>
-        )}
-
         {/* Submit */}
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            disabled={loading}
-            className="px-6 py-2 rounded-lg bg-black text-white disabled:opacity-60"
-          >
-            {loading ? "Creating..." : "Create Trainer"}
-          </button>
-        </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full rounded-xl bg-red-600 py-3 font-semibold text-white hover:bg-red-700 transition disabled:opacity-60"
+        >
+          {loading ? "Creating..." : "Create Trainer"}
+        </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CreateNewTrainerComponent
+export default CreateNewTrainerComponent;

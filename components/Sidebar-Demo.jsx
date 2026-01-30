@@ -50,21 +50,21 @@ export function SidebarDemo({ user, children }) {
     //   href: "#",
     //   icon: <IconUserBolt className="h-5 w-5 shrink-0 text-neutral-200" />,
     // },
-    {
-      label: "Classes",
-      href: "#",
-      icon: <IconSchool className="h-5 w-5 shrink-0 text-neutral-200" />,
-    },
+    // {
+    //   label: "Classes",
+    //   href: "#",
+    //   icon: <IconSchool className="h-5 w-5 shrink-0 text-neutral-200" />,
+    // },
     {
       label: "Trainers",
-      href: "#",
+      href: "/getPersonalTrainer",
       icon: <IconStretching className="h-5 w-5 shrink-0 text-neutral-200" />,
     },
-    {
-      label: "Settings",
-      href: "#",
-      icon: <IconSettings className="h-5 w-5 shrink-0 text-neutral-200" />,
-    },
+    // {
+    //   label: "Settings",
+    //   href: "#",
+    //   icon: <IconSettings className="h-5 w-5 shrink-0 text-neutral-200" />,
+    // },
     {
       label: "Logout",
       href: "#",

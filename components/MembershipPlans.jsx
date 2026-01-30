@@ -20,7 +20,7 @@ const MembershipPlans = ({ user }) => {
           console.log("handler response : ", response)
           const paymentResponse  = await axios.post("/api/payment/verify", response);
           console.log("paymentResponse : ", paymentResponse)
-          window.location.href = "/ninad";
+          window.location.href = "/getPersonalTrainer";
         } catch (err) {
           console.log(err);
           alert("Payment verification failed");
