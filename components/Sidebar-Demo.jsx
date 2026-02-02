@@ -6,6 +6,7 @@ import {
   IconBarbellFilled,
   IconBrandTabler,
   IconCalendarEventFilled,
+  IconHome,
   IconSchool,
   IconSettings,
   IconStretching,
@@ -33,6 +34,11 @@ export function SidebarDemo({ user, children }) {
   };
 
   const links = [
+    {
+      label: "Home",
+      href: "/",
+      icon: <IconHome className="h-5 w-5 shrink-0 text-neutral-200" />,
+    },
     {
       label: "Dashboard",
       href: "/admindashboard",

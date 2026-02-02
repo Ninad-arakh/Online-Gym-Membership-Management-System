@@ -15,7 +15,7 @@ export async function GET() {
     if (!token) return NextResponse.json({ membership: null }, { status: 401 });
     
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("decoded : ", decoded)
+    // console.log("decoded : ", decoded)
     await connectDB();
 
     const membership = await Membership.findOne({ userId: decoded.id })
