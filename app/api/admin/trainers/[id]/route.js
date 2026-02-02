@@ -17,9 +17,15 @@ export async function PATCH(req, { params }) {
   const { isActive } = await req.json();
   await connectDB();
 
+  const p = await params
+  const paramsID = p.id;
+
+  // console.log("params Id : ", paramsID)
+
+  // console.log("isActive : ", isActive)
 
   const trainer = await Trainer.findByIdAndUpdate(
-    params.id,
+    paramsID,
     { isActive },
     { new: true },
   );

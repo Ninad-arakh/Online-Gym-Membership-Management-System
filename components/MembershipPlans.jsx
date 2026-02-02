@@ -18,7 +18,10 @@ const MembershipPlans = ({ user }) => {
 
       handler: async function (response) {
         try {
-          const paymentResponse  = await axios.post("/api/payment/verify", response);
+          const paymentResponse = await axios.post(
+            "/api/payment/verify",
+            response,
+          );
           window.location.href = "/getPersonalTrainer";
         } catch (err) {
           console.log(err);
@@ -31,12 +34,16 @@ const MembershipPlans = ({ user }) => {
       },
     };
 
+    if (typeof window === "undefined" || !window.Razorpay) {
+      toast.error("Payment system loading, please try again.");
+      return;
+    }
+
     const rzp = new window.Razorpay(options);
     rzp.open();
   }
 
   const handlePayment = async (planId) => {
-
     try {
       const res = await axios.post("/api/payment", { planId });
 

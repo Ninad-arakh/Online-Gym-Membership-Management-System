@@ -8,6 +8,7 @@ import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { IconEye, IconEyeOff } from "@tabler/icons-react";
 
 export default function SignupFormDemo() {
   const [isLogin, setIsLogin] = useState(true);
@@ -22,6 +23,8 @@ export default function SignupFormDemo() {
     password: "",
     confirmPassword: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -178,14 +181,26 @@ export default function SignupFormDemo() {
           <Label htmlFor="password" className="text-white">
             Password
           </Label>
-          <Input
-            id="password"
-            value={userForm.password}
-            onChange={handleChange}
-            placeholder="••••••••"
-            type="password"
-            className="bg-gray-800/70 text-white"
-          />
+
+          <div className="relative">
+            <Input
+              id="password"
+              value={userForm.password}
+              onChange={handleChange}
+              placeholder="••••••••"
+              type={showPassword ? "text" : "password"}
+              className="bg-gray-800/70 text-white pr-10"
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+              tabIndex={-1}
+            >
+              {showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
+            </button>
+          </div>
         </LabelInputContainer>
 
         {!isLogin && (

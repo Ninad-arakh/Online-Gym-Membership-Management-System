@@ -51,6 +51,7 @@ const ManageTrainers = () => {
         { withCredentials: true }
       );
 
+      console.log("res : ", res)
       if(res.status === 200){
         toast.success("Success.")
       }
