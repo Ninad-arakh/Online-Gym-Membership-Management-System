@@ -10,6 +10,7 @@ import MembershipPlans from "@/components/MembershipPlans";
 import { LabelInputContainer } from "@/components/Signup-form-demo";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 const MembershipPlan = () => {
   const [user, setUser] = useState(null);
@@ -38,19 +39,19 @@ const MembershipPlan = () => {
 
     // -------- Validations --------
     if (!Form.title.trim()) {
-      return alert("Plan name is required");
+      return toast.error("Plan name is required");
     }
 
     if (Number(Form.price) <= 200) {
-      return alert("Price must be greater than 200");
+      return toast.error("Price must be greater than 200");
     }
 
     if (Number(Form.duration) <= 0) {
-      return alert("Duration must be greater than 0");
+      return toast.error("Duration must be greater than 0");
     }
 
     if (!Form.description.trim()) {
-      return alert("Description is required");
+      return toast.error("Description is required");
     }
 
     // if (!Form.features.length || Form.features.some((f) => !f)) {
@@ -95,9 +96,9 @@ const MembershipPlan = () => {
         },
       );
 
-      // console.log("response of plans : ", response);
 
       if (response.status === 201 || response.status === 200) {
+        toast.success("Plan Added.");
         setForm({
           title: "",
           price: 0,
@@ -111,7 +112,7 @@ const MembershipPlan = () => {
       }
     } catch (err) {
       console.log(err);
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Something went wrong while creating plan",
       );
@@ -135,8 +136,6 @@ const MembershipPlan = () => {
       console.log(err);
     }
   };
-
-
 
   useEffect(() => {
     if (!user) {

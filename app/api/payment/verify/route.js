@@ -45,10 +45,8 @@ export async function POST(req) {
       );
     }
 
-    console.log("payment.planId:", payment.planId);
 
     const plan = await Plan.findById(payment.planId);
-    console.log("plan fetched from DB:", plan);
     if (!plan) {
       return NextResponse.json({ message: "Plan not found" }, { status: 404 });
     }

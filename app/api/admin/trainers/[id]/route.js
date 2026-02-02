@@ -1,4 +1,7 @@
+import { connectDB } from "@/lib/db";
 import Trainer from "@/models/Trainer";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req, { params }) {
@@ -13,6 +16,7 @@ export async function PATCH(req, { params }) {
 
   const { isActive } = await req.json();
   await connectDB();
+
 
   const trainer = await Trainer.findByIdAndUpdate(
     params.id,

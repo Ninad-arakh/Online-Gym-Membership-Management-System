@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const MembershipPlans = ({ user }) => {
   const [membershipDetails, setMembershipDetails] = useState([]);
@@ -17,13 +18,11 @@ const MembershipPlans = ({ user }) => {
 
       handler: async function (response) {
         try {
-          console.log("handler response : ", response)
           const paymentResponse  = await axios.post("/api/payment/verify", response);
-          console.log("paymentResponse : ", paymentResponse)
           window.location.href = "/getPersonalTrainer";
         } catch (err) {
           console.log(err);
-          alert("Payment verification failed");
+          toast.error("Payment verification failed");
         }
       },
 
@@ -38,7 +37,6 @@ const MembershipPlans = ({ user }) => {
 
   const handlePayment = async (planId) => {
 
-    // console.log("plan id : ", planId)
     try {
       const res = await axios.post("/api/payment", { planId });
 
@@ -47,7 +45,7 @@ const MembershipPlans = ({ user }) => {
       openRazorpayCheckout({ key, orderId, amount, currency });
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Payment failed");
+      toast.error(err.response?.data?.message || "Payment failed");
     }
   };
 

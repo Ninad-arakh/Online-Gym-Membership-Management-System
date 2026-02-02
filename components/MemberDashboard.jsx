@@ -14,7 +14,6 @@ const MemberDashboard = ({ user }) => {
       try {
         const { data } = await axios.get("/api/membership/me",{withCredentials:true});
         setMembership(data.membership);
-        console.log("data : ",  data)
       } catch (err) {
         console.error("error : ", err)
         setMembership(null);
@@ -66,7 +65,7 @@ const MemberDashboard = ({ user }) => {
       </div>
 
       {/* Membership Status Card */}
-      <div className="backdrop-blur-md bg-white/10 rounded-2xl p-8 shadow-xl">
+      <div className=" bg-slate-900/90 rounded-2xl p-8 shadow-xl">
         <div className="flex flex-col md:flex-row justify-between gap-6">
           {/* Left */}
           <div>
@@ -102,7 +101,7 @@ const MemberDashboard = ({ user }) => {
         </div>
 
         <div className="mt-8 flex justify-center">
-          <button className="bg-red-500 hover:bg-red-600 px-10 py-3 rounded-md">
+          <button className="bg-red-500 hover:bg-red-600 px-10 py-3 rounded-md cursor-not-allowed">
             Manage Membership
           </button>
         </div>
@@ -110,7 +109,7 @@ const MemberDashboard = ({ user }) => {
 
       {/* Trainer Info (only if plan allows) */}
       {["pro", "elite"].includes(membership.planSlug) && (
-        <div className="backdrop-blur-md bg-white/10 rounded-2xl p-6">
+        <div className="backdrop-blur-md bg-slate-900/90 rounded-2xl p-6">
           <h3 className="text-xl font-semibold mb-3">Personal Trainer</h3>
 
           {membership.trainerId ? (

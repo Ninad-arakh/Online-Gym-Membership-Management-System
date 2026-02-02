@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ExpandableCardDemo from "@/components/expandable-card-demo-standard";
+import { toast } from "sonner";
 
 const GetPersonalTrainer = () => {
   const [user, setUser] = useState(null);
@@ -34,12 +35,12 @@ const GetPersonalTrainer = () => {
       );
 
       if (response.status === 200) {
-        alert("Trainer assigned successfully");
+        toast.success("Trainer assigned successfully");
         router.push("/dashboard"); // or wherever you want
       }
     } catch (err) {
       const message = err.response?.data?.message || "Something went wrong";
-      alert(message);
+      toast.error(message || "Something went wrong!");
     }
   };
 

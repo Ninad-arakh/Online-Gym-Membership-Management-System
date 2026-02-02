@@ -3,6 +3,7 @@ import { SidebarDemo } from "@/components/Sidebar-Demo";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useLayoutEffect, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const ManageTrainers = () => {
   const [user, setUser] = useState(null);
@@ -44,11 +45,15 @@ const ManageTrainers = () => {
 
   const toggleTrainerStatus = async (id, currentStatus) => {
     try {
-      await axios.patch(
+      const res = await axios.patch(
         `/api/admin/trainers/${id}`,
         { isActive: !currentStatus },
         { withCredentials: true }
       );
+
+      if(res.status === 200){
+        toast.success("Success.")
+      }
 
       setTrainers((prev) =>
         prev.map((t) =>
@@ -56,6 +61,7 @@ const ManageTrainers = () => {
         )
       );
     } catch (err) {
+      toast.error("Failed to update trainer");
       console.error("Failed to update trainer");
     }
   };

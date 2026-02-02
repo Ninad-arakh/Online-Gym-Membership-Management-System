@@ -12,7 +12,6 @@ const LoginPage = () => {
     const getUser = async () => {
       try{
         const response = await axios.get("/api/auth/me", {withCredentials: true})
-        console.log("response : ", response)
         if(response.status === 200){
           router.push("/")
         }

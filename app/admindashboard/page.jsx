@@ -14,7 +14,6 @@ const AdminDashboard = () => {
         const response = await axios.get("/api/auth/me", {
           withCredentials: true,
         });
-        //   console.log("response : ", response)
         if (response.status === 200) {
           if(response.data.user.role === "user"){
             router.replace("/unauthorized")

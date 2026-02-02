@@ -7,6 +7,7 @@ import axios from "axios";
 import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function SignupFormDemo() {
   const [isLogin, setIsLogin] = useState(true);
@@ -62,7 +63,7 @@ export default function SignupFormDemo() {
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -98,8 +99,11 @@ export default function SignupFormDemo() {
       const res = await axios.post(url, payload, {
         withCredentials: true,
       });
+      if (res.status === 201) {
+        toast.success("Success, Please Login.");
+      }
       if (res.status === 200) {
-        setOpen(true)
+        setOpen(true);
         router.replace("/");
       }
     } catch (err) {
@@ -110,12 +114,18 @@ export default function SignupFormDemo() {
             err.response?.data?.error ||
             "Authentication failed",
         );
+        toast.error(
+          err.response?.data?.message ||
+            err.response?.data?.error ||
+            "Authentication failed",
+        );
       } else {
         setError("Something went wrong");
+        toast.error("Something went wrong!");
       }
     } finally {
       setLoading(false);
-      setOpen(false)
+      setOpen(false);
     }
   };
 
@@ -220,7 +230,7 @@ export default function SignupFormDemo() {
           onClose={handleClose}
           severity="success"
           variant="filled"
-          sx={{ width: '100%' }}
+          sx={{ width: "100%" }}
         >
           Success! Please Logi.
         </Alert>

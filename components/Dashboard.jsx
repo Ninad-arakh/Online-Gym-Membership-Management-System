@@ -23,7 +23,6 @@ const Dashboard = () => {
     try {
       const response = await axios.get("/api/dashboard");
 
-      // console.log("response : ", response.data);
       if (response.status === 200) {
         setDashboardData(response.data);
         setStats(response.data.stats);
