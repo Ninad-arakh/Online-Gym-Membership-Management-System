@@ -133,7 +133,7 @@ export default function SignupFormDemo() {
   };
 
   return (
-    <div className="shadow-input backdrop-blur-xs mx-auto w-full max-w-xl bg-linear-to- from-blue-500/40 to-red-500/40 rounded-none bg-black/35 p-4 md:rounded-2xl md:p-8 dark:bg-black">
+    <div className="shadow-input backdrop-blur-md mx-auto w-full max-w-xl bg-linear-to- from-blue-500/40 to-red-500/40 rounded-none bg-black/35 p-4 md:rounded-2xl md:p-8 dark:bg-black">
       <h2 className="text-3xl text-center font-bold text-white">
         {isLogin ? "Welcome Back" : "Create an Account"}
       </h2>
