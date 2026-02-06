@@ -72,7 +72,7 @@ const GetPersonalTrainer = () => {
         <ExpandableCardDemo
           cards={trainer.map((t) => ({
             title: t.name,
-            description: `${t.experienceYears} yrs experience • ${t.gender}`,
+            description: `${t.experienceYears} yrs experience • ${t.age ?? "—"} yrs • ${t.gender}`,
             onAction: () => assignTrainer(t._id),
             content: (
               <>
@@ -87,10 +87,17 @@ const GetPersonalTrainer = () => {
                   ))}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                   <div className="rounded-lg bg-white/5 p-3">
                     <p className="text-neutral-400">Experience</p>
                     <p className="font-semibold">{t.experienceYears} Years</p>
+                  </div>
+
+                  <div className="rounded-lg bg-white/5 p-3">
+                    <p className="text-neutral-400">Age</p>
+                    <p className="font-semibold">
+                      {typeof t.age === "number" ? `${t.age} Years` : "—"}
+                    </p>
                   </div>
 
                   <div className="rounded-lg bg-white/5 p-3">

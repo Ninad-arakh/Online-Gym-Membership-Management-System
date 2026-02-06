@@ -15,6 +15,7 @@ const SPECIALIZATIONS = [
 const CreateNewTrainerComponent = () => {
   const [trainerForm, setTrainerForm] = useState({
     name: "",
+    age: "",
     gender: "",
     specialization: [],
     experienceYears: "",
@@ -48,23 +49,23 @@ const CreateNewTrainerComponent = () => {
         "/api/admin/trainers",
         {
           ...trainerForm,
+          age: Number(trainerForm.age),
           experienceYears: Number(trainerForm.experienceYears),
         },
-        { withCredentials: true }
+        { withCredentials: true },
       );
 
       toast.success("Trainer created successfully");
 
       setTrainerForm({
         name: "",
+        age: "",
         gender: "",
         specialization: [],
         experienceYears: "",
       });
     } catch (err) {
-      toast.error(
-        err?.response?.data?.message || "Failed to create trainer"
-      );
+      toast.error(err?.response?.data?.message || "Failed to create trainer");
     } finally {
       setLoading(false);
     }
@@ -96,7 +97,7 @@ const CreateNewTrainerComponent = () => {
         </div>
 
         {/* Gender & Experience */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm text-neutral-400 mb-1">
               Gender
@@ -113,6 +114,19 @@ const CreateNewTrainerComponent = () => {
               <option value="female">Female</option>
               <option value="other">Other</option>
             </select>
+          </div>
+
+          <div>
+            <label className="block text-sm text-neutral-400 mb-1">Age</label>
+            <input
+              type="number"
+              min="18"
+              name="age"
+              value={trainerForm.age}
+              onChange={handleChange}
+              required
+              className="w-full rounded-lg bg-black/40 border border-white/10 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
+            />
           </div>
 
           <div>

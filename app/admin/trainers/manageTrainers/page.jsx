@@ -48,18 +48,18 @@ const ManageTrainers = () => {
       const res = await axios.patch(
         `/api/admin/trainers/${id}`,
         { isActive: !currentStatus },
-        { withCredentials: true }
+        { withCredentials: true },
       );
 
-      console.log("res : ", res)
-      if(res.status === 200){
-        toast.success("Success.")
+      console.log("res : ", res);
+      if (res.status === 200) {
+        toast.success("Success.");
       }
 
       setTrainers((prev) =>
         prev.map((t) =>
-          t._id === id ? { ...t, isActive: !currentStatus } : t
-        )
+          t._id === id ? { ...t, isActive: !currentStatus } : t,
+        ),
       );
     } catch (err) {
       toast.error("Failed to update trainer");
@@ -127,6 +127,16 @@ const ManageTrainers = () => {
                   <p className="text-sm text-gray-400 capitalize">
                     Gender: {trainer.gender}
                   </p>
+
+                  {/* Age */}
+                  {typeof trainer.age === "number" && (
+                    <p className="text-sm text-gray-400">
+                      Age:{" "}
+                      <span className="font-medium text-white">
+                        {trainer.age} years
+                      </span>
+                    </p>
+                  )}
 
                   <p className="text-sm text-gray-300">
                     Experience:{" "}

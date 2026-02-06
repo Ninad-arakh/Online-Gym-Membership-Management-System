@@ -4,6 +4,12 @@ const TrainerSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
 
+    age: {
+      type: Number,
+      min: 18, // optional: trainers must be adults
+      max: 100, // optional safety cap
+    },
+
     gender: {
       type: String,
       enum: ["male", "female", "other"],
@@ -18,6 +24,7 @@ const TrainerSchema = new mongoose.Schema(
     experienceYears: {
       type: Number,
       default: 0,
+      min: 0,
     },
 
     isActive: {
