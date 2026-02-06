@@ -4,7 +4,7 @@ import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
-export default function ExpandableCardDemo({ cards }) {
+export default function ExpandableCardDemo({ cards, isRequestTrainers = true }) {
   const [active, setActive] = useState(null);
   const ref = useRef(null);
   const id = useId();
@@ -53,14 +53,14 @@ export default function ExpandableCardDemo({ cards }) {
               </div>
 
               {/* CTA */}
-              <div className="p-6 border-t border-white/10 flex justify-end">
+              {isRequestTrainers && <div className="p-6 border-t border-white/10 flex justify-end">
                 <button
                   onClick={active.onAction}
                   className="rounded-xl bg-red-600 px-6 py-2 font-semibold hover:bg-red-700 transition"
                 >
                   Request Trainer
                 </button>
-              </div>
+              </div>}
             </motion.div>
           </div>
         )}

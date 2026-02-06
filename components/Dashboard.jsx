@@ -79,10 +79,10 @@ const Dashboard = () => {
           </button> */}
 
           <button
-            onClick={() => router.push("/admin/payments")}
+            onClick={() => router.push("/admin/manageUsers")}
             className="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 transition text-white text-sm font-semibold"
           >
-            Payments
+            Users
           </button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">

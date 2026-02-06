@@ -21,7 +21,7 @@ const MembershipPlan = () => {
   const [editingPlanId, setEditingPlanId] = useState(null);
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {setOpen(false); setEditOpen(false)}
 
   const [Form, setForm] = useState({
     title: "",
@@ -206,8 +206,7 @@ const MembershipPlan = () => {
                 <button
                   className="absolute top-2 right-2 cursor-pointer bg-gray-600 px-2  rounded-xl flex justify-center items-center"
                   onClick={(e) => {
-                    setEditOpen(false);
-                    setEditingPlanId(null);
+                    handleClose();
                     e.preventDefault();
                   }}
                 >
@@ -322,7 +321,8 @@ const MembershipPlan = () => {
                 <button
                   className="absolute top-2 right-2 cursor-pointer bg-gray-600 px-2  rounded-xl flex justify-center items-center"
                   onClick={(e) => {
-                    handleClose();
+                    setEditOpen(false);
+                    setEditingPlanId(null);
                     e.preventDefault();
                   }}
                 >

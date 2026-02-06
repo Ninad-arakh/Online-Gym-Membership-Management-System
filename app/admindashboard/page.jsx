@@ -33,7 +33,7 @@ const AdminDashboard = () => {
     }
   },[])
   return (
-    <SidebarDemo>
+    <SidebarDemo user={user}>
       <Dashboard/>
     </SidebarDemo>
   )
