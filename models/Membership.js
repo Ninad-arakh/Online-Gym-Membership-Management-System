@@ -14,6 +14,11 @@ const MembershipSchema = new mongoose.Schema(
       ref: "Trainer",
       default: null,
     },
+    
+    weightKg: {
+      type: Number,
+      min: 1,
+    },
 
     // Plan reference
     planId: {

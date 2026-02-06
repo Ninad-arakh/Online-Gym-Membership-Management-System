@@ -119,11 +119,11 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 w-full sm:grid-cols-2 gap-4">
-          <div className="h-full w-full rounded-lg bg-gray-10 dark:bg-neutral-800">
+          <div className="h-full w-full rounded-lg bg-gray-10 dark:bg-neutral-800 ">
             <MembersGrowthChart data={dashboardData.graphs.userGrowth} />
           </div>
 
-          <div className="h-full w-full rounded-lg bg-gray-10 dark:bg-neutral-800">
+          <div className=" w-full rounded-lg bg-gray-10 dark:bg-neutral-800 h-[70vh]">
             <div className="flex h-full flex-col rounded-lg bg-linear-to-br from-[#292026] to-[#49213e] dark:bg-neutral-800 p-4 text-gray-200">
               <h2 className="mb-3 text-lg font-semibold text-center">
                 Recent Purchases

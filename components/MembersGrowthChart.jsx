@@ -25,7 +25,7 @@ export default function MembersGrowthChart({data}) {
   };
 
   return (
-    <div className="w-full h-80 bg-linear-to-br from-[#292026] to-[#49213e] rounded-xl p-6 shadow-lg border border-white/5">
+    <div className="w-full h-[70vh] bg-linear-to-br from-[#292026] to-[#49213e] rounded-xl p-6 shadow-lg border border-white/5">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-white font-semibold text-lg">Members Growth</h2>

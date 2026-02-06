@@ -27,20 +27,34 @@ const GetPersonalTrainer = () => {
   };
 
   const assignTrainer = async (trainerId) => {
+    const weightInput = prompt("Please enter your weight (in kg):");
+
+    if (!weightInput) {
+      toast.error("Weight is required");
+      return;
+    }
+
+    const weightKg = Number(weightInput);
+
+    if (isNaN(weightKg) || weightKg <= 0) {
+      toast.error("Please enter a valid weight in kg");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "/api/membership/assignTrainer",
-        { trainerId },
+        { trainerId, weightKg },
         { withCredentials: true },
       );
 
       if (response.status === 200) {
         toast.success("Trainer assigned successfully");
-        router.push("/dashboard"); // or wherever you want
+        router.push("/dashboard");
       }
     } catch (err) {
       const message = err.response?.data?.message || "Something went wrong";
-      toast.error(message || "Something went wrong!");
+      toast.error(message);
     }
   };
 
