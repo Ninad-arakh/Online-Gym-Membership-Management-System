@@ -21,28 +21,16 @@ const MemberDashboard = ({ user }) => {
         setLoading(false);
       }
     };
-    fetchMembership();
+    // fetchMembership();
   }, []);
 
-  if (loading) return null;
+  // if (loading) return null;
 
   /* ---------------- NO MEMBERSHIP ---------------- */
   if (!membership) {
     return (
-      <div className="flex flex-col items-center justify-center -mt-32 text-center text-white w-full">
-        {/* <h1 className="text-4xl font-semibold">Welcome, {user.name}</h1>
-        <p className="mt-3 text-gray-400 max-w-md">
-          You don’t have an active membership yet. Choose a plan to unlock
-          workouts, trainers, and tracking.
-        </p>
-
-        <Link href={"/membership/plan"}><button className="mt-8 bg-red-500 hover:bg-red-600 px-10 py-3 rounded-md text-lg">
-          View Plans
-        </button></Link> */}
-
-        {/* <div className="h-160 rounded-md flex flex-col antialiased bg-slate-800/85 dark:bg-black dark:bg-grid-white/[0.05]  relative overflow-hidden F"> */}
+      <div className="flex flex-col items-center justify-center -mt-32 text-center w-full">
           <Cards />
-        {/* </div> */}
       </div>
     );
   }

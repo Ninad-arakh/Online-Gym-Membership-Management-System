@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import bgLnading from "@/public/bgLanding2.png";
 import muscles from "@/public/popularPlans/muscle.jpg";
 import together from "@/public/popularPlans/together.jpg";
@@ -9,26 +9,64 @@ import gsap from "gsap";
 import Image from "next/image";
 import Lenis from "lenis";
 import Link from "next/link";
+import img1 from "@/public/Carousel/1.jpg";
+import img2 from "@/public/Carousel/2.jpg";
+import img3 from "@/public/Carousel/3.jpg";
+import img4 from "@/public/Carousel/4.jpg";
+import img5 from "@/public/Carousel/5.jpg";
+import img6 from "@/public/Carousel/6.jpg";
+import img7 from "@/public/Carousel/7.jpg";
+import img8 from "@/public/Carousel/8.jpg";
+import img9 from "@/public/Carousel/9.jpg";
+import WhyChooseUs from "./WhyChooseUs";
 
 export default function DashboardLanding() {
   const root = useRef(null);
 
-  // useEffect(() =>{
+  const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 3) % images.length);
+    }, 3000); // Auto-scroll every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Change image on button click
+  const handlePrev = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 3 + images.length) % images.length,
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 3) % images.length);
+  };
+
+  // useEffect(() => {
   //   const lenis = new Lenis({
-  //     duration: 1
-  //   })
+  //     duration: 1.1,
+  //     smoothWheel: true,
+  //     smoothTouch: false,
+  //   });
+
+  //   let rafId;
 
   //   const raf = (time) => {
-  //     lenis.raf(time)
-  //     requestAnimationFrame(raf)
-  //   }
+  //     lenis.raf(time);
+  //     rafId = requestAnimationFrame(raf);
+  //   };
 
-  //   requestAnimationFrame(raf)
+  //   rafId = requestAnimationFrame(raf);
 
-  //   // return () => {
-  //   //   lenis.destroy()
-  //   // }
-  // },[])
+  //   return () => {
+  //     cancelAnimationFrame(rafId);
+  //     lenis.destroy();
+  //   };
+  // }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -47,48 +85,73 @@ export default function DashboardLanding() {
   return (
     <main
       ref={root}
-      className="min-h-screen text-white bg-linear-to-br from-[#2b0000] via-[#6d0000] to-black overflow-y-scroll no-scrollbar w-full relative"
+      className=" overflow-y-scroll no-scrollbar w-full relative"
     >
-      {/* <section className="relative w-full h-screen"></section> */}
-      <Image
-        src={bgLnading}
-        alt="bgImage"
-        className="absolute inset-0 bg-cover mt-32 h-screen "
-      />
       {/* HERO */}
-      <section className="relative px-6 py-24 md:py-32 max-w-7xl mx-auto  md:mt-30 mt-8 h-screen flex flex-col justify-center items-center">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,0,0,0.15),transparent_60%)] " />
-        <h1 className="animate text-4xl md:text-6xl font-extrabold leading-tight">
-          Transform Your Body.
-          <br />
-          <span className="text-red-400">Control Your Fitness.</span>
-        </h1>
-        <p className="animate mt-6 max-w-2xl text-white/70 text-lg mx-auto">
-          A complete gym management and fitness experience designed for
-          discipline, performance, and results. Everything you need — one
-          powerful platform.
-        </p>
+      <section className="relative px-6 py-24 md:py-32 gap-8 mx-auto bg-linear-to-br from-[#f1f0f8] via-[#eeccf7]/20 to-[#fccbc0]/20 md:mt-30 mt-8 min-h-screen flex flex-col justify-center items-center">
+        <div className="">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,0,0,0.15),transparent_60%)]/80 " />
+          <h1 className="animate text-4xl md:text-6xl font-extrabold leading-tight text-[#312D3F]">
+            Transform Your Body.
+            <br />
+            <span className="text-red-400">Control Your Fitness.</span>
+          </h1>
+          <p className="animate mt-6 max-w-2xl text-[#312D3F] text-lg mx-auto">
+            A complete gym management and fitness experience designed for
+            discipline, performance, and results. Everything you need — one
+            powerful platform.
+          </p>
 
-        <div className="animate mt-10 flex flex-wrap gap-4 justify-center">
-          {/* <button className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 transition shadow-lg shadow-red-600/30">
-            Explore Programs
-          </button> */}
-          <Link href={"/membership/plan"}>
-            <button className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 transition shadow-lg shadow-red-600/30">
-              View Memberships
-            </button>
-          </Link>
-          {/* <Link href={""} ><button className="px-6 py-3 rounded-xl border border-white/20 hover:border-red-500 hover:text-red-400 transition">
-            View Memberships
-          </button></Link> */}
+          <div className="animate mt-10 flex flex-wrap gap-4 justify-center">
+            <Link href={"/membership/plan"}>
+              <button className="px-6 py-3 rounded-xl text-white bg-red-600 hover:bg-red-700 transition shadow-lg shadow-red-600/30">
+                View Memberships
+              </button>
+            </Link>
+          </div>
+        </div>
+
+        <div className="relative md:w-10/12 w-full mx-auto overflow-hidden rounded-xl">
+          <div
+            className="flex transition-transform duration-1000 ease-in-out gap-2 mx-4"
+            style={{ transform: `translateX(-${(currentIndex / 3) * 33.33}%)` }}
+          >
+            {images.map((img, index) => (
+              <div key={index} className="md:w-1/3 shrink-0 rounded-xl">
+                <Image
+                  src={img}
+                  alt={`carousel image ${index + 1}`}
+                  className="w-full md:h-full h-50 object-cover rounded-xl"
+                />
+              </div>
+            ))}
+          </div>
+
+          <button
+            onClick={handlePrev}
+            className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white"
+          >
+            &#10094;
+          </button>
+
+          <button
+            onClick={handleNext}
+            className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white"
+          >
+            &#10095;
+          </button>
         </div>
       </section>
 
+      <WhyChooseUs />
+
       {/* At center  */}
-      <section className="w-full min-h-screen mt-2 py-20 flex flex-col gap-10 justify-center">
+      <section className="w-full min-h-screen mt- py-20 flex flex-col gap-10 justify-center bg-linear-to-br from-[#f1f0f8] via-[#eeccf7]/20 to-[#fccbc0]/20">
         <div className=" flex gap-3 flex-col justify-center items-center">
-          <h4 className="text-2xl">At Center</h4>
-          <h2 className="text-5xl  font-semibold">Trainer-led Group Classes</h2>
+          <h4 className="text-2xl text-[#312D3F]">At Center</h4>
+          <h2 className="text-5xl  font-semibold text-[#312D3F]">
+            Trainer-led Group Classes
+          </h2>
         </div>
         <div className=" w-7/12 mx-auto flex justify-center items-center gap-8">
           <img
@@ -114,11 +177,10 @@ export default function DashboardLanding() {
         </div>
       </section>
 
-      {/* popular plans  */}
-      <section className="flex flex-col justify-center gap-8 w-9/12 mx-auto min-h-screen mt-2">
+      {/* <section className="flex flex-col justify-center gap-8 w-full mx-auto min-h-screen mt- bg-linear-to-br from-[#f1f0f8] via-[#eeccf7]/20 to-[#fccbc0]/20">
+            {/* popular programs
         <div className="justify-between flex">
-          <h2 className="text-5xl">Popular Programs</h2>
-          {/* <h2>Popular Programs</h2> */}
+          <h2 className="text-5xl text-[#312D3F]">Popular Programs</h2>
         </div>
         <div className="flex gap-4 items-center">
           <div className="w-4/12 group h-[50vh] rounded-xl relative overflow-hidden hover:scale-105 duration-300 ease-in-out">
@@ -161,60 +223,28 @@ export default function DashboardLanding() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* FEATURES */}
-      {/* <section className="px-6 py-20 max-w-7xl mx-auto ">
-        <h2 className="animate text-3xl font-bold mb-10">
-          Why This Gym Platform Works
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-8 ">
-          {[
-            {
-              title: "Smart Membership Control",
-              desc: "Manage plans, renewals, and benefits with absolute clarity and zero friction.",
-            },
-            {
-              title: "Trainer & Class Booking",
-              desc: "Schedule sessions, track attendance, and maximize workout efficiency.",
-            },
-            {
-              title: "Performance Tracking",
-              desc: "Stay consistent with detailed insights and structured programs.",
-            },
-          ].map((f, i) => (
-            <div
-              key={i}
-              className="animate group p-6 rounded-2xl bg-white/10 backdrop-blur border border-white/10 hover:border-red-500 hover:bg-white/15 transition-all duration-300"
-            >
-              <h3 className="text-xl font-semibold group-hover:text-red-400 transition">
-                {f.title}
-              </h3>
-              <p className="mt-3 text-white/70">{f.desc}</p>
-            </div>
-          ))}
-        </div>
       </section> */}
 
       {/* IMAGE + TEXT */}
-      <section className="px-6 py-20 max-w-7xl mx-auto grid md:grid-cols-2 gap-14 items-center ">
+      <section className="md:px-20 px-2 py-20 max-w-7x w-full mx-auto grid md:grid-cols-2 gap-14 items-center  bg-linear-to-br from-[#f1f0f8] via-[#eeccf7]/20 to-[#fccbc0]/20">
         <div className="">
-          <h2 className="text-3xl font-bold">Built for Serious Training</h2>
-          <p className="mt-4 text-white/70">
+          <h2 className="text-3xl font-bold text-[#312D3F]">
+            Built for Serious Training
+          </h2>
+          <p className="mt-4 text-[#312D3F]">
             This platform isn’t about motivation quotes. It’s about structure,
             accountability, and systems that actually help you show up and
             perform.
           </p>
 
-          <ul className="mt-6 space-y-3 text-white/80 animate-pulse">
+          <ul className="mt-6 space-y-3 text-[#312D3F] animate-pulse">
             <li>✔ Clean scheduling & planning</li>
             <li>✔ Real progress visibility</li>
             <li>✔ Zero clutter, zero confusion</li>
           </ul>
 
           <Link href={"/membership/plan"}>
-            <button className="mt-6 px-6 py-3 rounded-xl border border-white/20 hover:border-red-500 hover:text-red-400 transition">
+            <button className="mt-6 px-6 py-3 rounded-xl border border-red-500 text-red-400 transition-all duration-300">
               View Memberships
             </button>
           </Link>
@@ -230,44 +260,6 @@ export default function DashboardLanding() {
           />
         </div>
       </section>
-
-      {/* TESTIMONIALS */}
-      {/* <section className="px-6 py-20 max-w-7xl mx-auto">
-        {/* <h2 className="animate text-3xl font-bold mb-12">
-          Trusted by Dedicated Athletes
-        </h2> *
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            "This system keeps me consistent. No excuses.",
-            "Best gym experience I’ve had — clean and powerful.",
-            "Everything is organized. I just train.",
-          ].map((t, i) => (
-            <div
-              key={i}
-              className="animate p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-red-500 transition"
-            >
-              <p className="text-white/80">“{t}”</p>
-              <p className="mt-4 text-sm text-white/50">— Gym Member</p>
-            </div>
-          ))}
-        </div>
-      </section> */}
-
-      {/* CTA */}
-      {/* <section className="px-6 py-24 text-center h-screen flex flex-col justify-center items-center">
-        <h2 className="animate text-4xl font-bold">
-          Start Training With Purpose
-        </h2>
-        <p className="animate mt-4 text-white/70 max-w-xl mx-auto">
-          This isn’t just a gym system. It’s a commitment to structure,
-          progress, and discipline.
-        </p>
-
-        <button className="animate mt-8 px-8 py-4 rounded-xl bg-red-600 hover:bg-red-700 transition shadow-xl shadow-red-600/40">
-          Get Started Now
-        </button>
-      </section> */}
     </main>
   );
 }

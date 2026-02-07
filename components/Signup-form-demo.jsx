@@ -111,7 +111,10 @@ export default function SignupFormDemo() {
       }
     } catch (err) {
       // ✅ Proper API error handling
-      if (axios.isAxiosError(err)) {
+      if (err.status === 500) {
+        setError("Authentication failed");
+        toast.error("Authentication failed");
+      } else if (axios.isAxiosError(err)) {
         setError(
           err.response?.data?.message ||
             err.response?.data?.error ||
