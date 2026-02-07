@@ -84,7 +84,7 @@ export const MobileSidebar = ({ className, children, ...props }) => {
       >
         <div className="flex justify-end z-20 w-full">
           <IconMenu2
-            className="text-neutral-800 dark:text-neutral-200"
+            className="text-[#312D3F] dark:text-neutral-200"
             onClick={() => setOpen(!open)}
           />
         </div>
@@ -104,7 +104,7 @@ export const MobileSidebar = ({ className, children, ...props }) => {
               )}
             >
               <div
-                className="absolute right-10 top-10 z-50 text-white  dark:text-neutral-200"
+                className="absolute right-10 top-10 z-50 text-[#312D3F]  dark:text-neutral-200"
                 onClick={() => setOpen(!open)}
               >
                 <IconX />
@@ -125,7 +125,7 @@ export const SidebarLink = ({ link, className, ...props }) => {
       <p
         onClick={link.onClick}
         className={cn(
-          "flex items-center justify-start gap-2  group/sidebar py-2",
+          "flex items-center justify-start gap-2  group/sidebar py-2 rounded-lg hover:bg-[#e4d0fa] transition-colors duration-300 ease-in-out",
           className,
         )}
         {...props}
@@ -140,7 +140,7 @@ export const SidebarLink = ({ link, className, ...props }) => {
               : "inline-block",
             opacity: animate ? (open ? 1 : 0) : 1,
           }}
-          className=" text-white dark:text-neutral-200 text-lg group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block p-0! m-0!"
+          className=" text-[#312D3F] dark:text-neutral-200 text-lg group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block p-0! m-0! "
         >
           {link.label}
         </motion.span>
