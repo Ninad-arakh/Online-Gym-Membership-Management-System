@@ -82,7 +82,7 @@ export function SidebarDemo({ user, children }) {
       )}
     >
       <Sidebar open={open} setOpen={setOpen} animate={true}>
-        <SidebarBody className="justify-between gap-10 bg-linear-to-br from-[#e9f0f9] to-[#dad6fc]">
+        <SidebarBody className="justify-between gap-10 bg-linear-to-br from-[#e9f0f9] via-[#f4f3f9] to-[#dad6fc]">
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto ">
             <>
               <Logo />

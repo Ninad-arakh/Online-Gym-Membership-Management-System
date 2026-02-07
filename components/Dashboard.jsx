@@ -40,19 +40,20 @@ const Dashboard = () => {
     return null;
   }
   return (
-    <div className="flex flex-1 bg-black overflow-y-scroll no-scrollbar">
-      <div className="flex h-full w-full flex-1 flex-col gap-4 rounded-tl-2xl  bg-linear-to-br from-black via-red-600/70 to-black p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
+    <div className="flex flex-1 bg-[#fdfbfe] overflow-y-scroll no-scrollbar ">
+      <div className="flex min-h-full w-full flex-1 flex-col gap-4 rounded-tl-2xl p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900 relative mb-8">
+        <h2 className="text-4xl text-[##312D3F] font-semibold tracking-tight">Admin Dashboard</h2>
         <div className="w-full flex flex-wrap gap-3 mb-2 justify-end">
           <button
             onClick={() => router.push("/admin/trainers/new")}
-            className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 transition text-white text-sm font-semibold"
+            className="px-4 py-2 rounded-lg bg-[#e6607b] hover:bg-[#fd6785] transition-all duration-300 shadow-sm cursor-pointer text-white text-sm font-semibold"
           >
             + Add Trainer
           </button>
 
           <button
             onClick={() => router.push("/admin/trainers/manageTrainers")}
-            className="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 transition text-white text-sm font-semibold"
+            className="px-4 py-2 rounded-lg bg-[#f4f2f7] hover:bg-fuchsia-200 transition-all duration-300 shadow-sm cursor-pointer text-[#312D3F] text-sm font-semibold"
           >
             View Trainers
           </button>
@@ -66,7 +67,7 @@ const Dashboard = () => {
 
           <button
             onClick={() => router.push("/membership/plan")}
-            className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 transition text-white text-sm font-semibold"
+            className="px-4 py-2 rounded-lg bg-[#f4f2f7] hover:bg-fuchsia-200 transition-all duration-300 shadow-sm cursor-pointer text-[#312D3F] text-sm font-semibold"
           >
             Manage Plans
           </button>
@@ -80,84 +81,87 @@ const Dashboard = () => {
 
           <button
             onClick={() => router.push("/admin/manageUsers")}
-            className="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 transition text-white text-sm font-semibold"
+            className="px-4 py-2 rounded-lg bg-[#f4f2f7] hover:bg-fuchsia-200 transition-all duration-300 shadow-sm cursor-pointer text-[#312D3F] text-sm font-semibold"
           >
             Users
           </button>
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="py-2 px-3 w-full text rounded-lg bg-neutral-100/90  dark:bg-neutral-800 ">
-            <h2 className="font-semibold text-xl text-center">Total members</h2>
-            <h1 className="font-bold text-3xl text-center">
+          <div className="py-3 px-3 w-full text rounded-lg bg-linear-to-br from-[#dcedfd] border shadow-lg dark:bg-neutral-800 ">
+            <h2 className="font-semibold text-xl  text-center md:text-left">Total members</h2>
+            <h1 className="font-bold text-3xl text-center md:text-left">
               {stats.totalUsers}
             </h1>
           </div>
 
-          <div className="py-2 px-3 w-full text rounded-lg bg-neutral-100/90  dark:bg-neutral-800 ">
-            <h2 className="font-semibold text-xl text-center">
+          <div className="py-2 px-3 w-full text rounded-lg bg-linear-to-br from-[#e2dafc] border shadow-lg dark:bg-neutral-800 ">
+            <h2 className="font-semibold text-xl  text-center md:text-left">
               Active members
             </h2>
-            <h1 className="font-bold text-3xl text-center">
+            <h1 className="font-bold text-3xl text-center md:text-left">
               {stats.activeMemberships}
             </h1>
           </div>
 
-          <div className="py-2 px-3 w-full text rounded-lg bg-neutral-100/90  dark:bg-neutral-800 ">
-            <h2 className="font-semibold text-xl text-center">
+          <div className="py-2 px-3 w-full text rounded-lg bg-linear-to-br from-[#e2f1f4] border shadow-lg  dark:bg-neutral-800 ">
+            <h2 className="font-semibold text-xl text-center md:text-left ">
               Monthly Revenue
             </h2>
-            <h1 className="font-bold text-3xl text-center">
+            <h1 className="font-bold text-3xl text-center md:text-left">
               {stats.monthlyRevenue}
             </h1>
           </div>
 
-          <div className="py-2 px-3 w-full text rounded-lg bg-neutral-100/90  dark:bg-neutral-800 ">
-            <h2 className="font-semibold text-xl text-center">Total admins</h2>
-            <h1 className="font-bold text-3xl text-center">
+          <div className="py-2 px-3 w-full text rounded-lg bg-linear-to-br from-[#fee2da] border shadow-lg dark:bg-neutral-800 ">
+            <h2 className="font-semibold text-xl  text-center md:text-left">Total admins</h2>
+            <h1 className="font-bold text-3xl text-center md:text-left">
               {stats.totalAdmins}
             </h1>
           </div>
         </div>
-        <div className="grid grid-cols-1 w-full sm:grid-cols-2 gap-4">
-          <div className="h-full w-full rounded-lg bg-gray-10 dark:bg-neutral-800 ">
+
+
+        <div className="grid grid-cols-1 w-full sm:grid-cols-2 gap-4 ">
+          <div className="h-full w-full rounded-lg bg-gray-10 dark:bg-neutral-800  ">
             <MembersGrowthChart data={dashboardData.graphs.userGrowth} />
           </div>
 
-          <div className=" w-full rounded-lg bg-gray-10 dark:bg-neutral-800 h-[70vh]">
-            <div className="flex h-full flex-col rounded-lg bg-linear-to-br from-[#292026] to-[#49213e] dark:bg-neutral-800 p-4 text-gray-200">
+          <div className=" w-full rounded-lg bg-gray-10 dark:bg-neutral-800 h-[70vh] shadow-xl border">
+            <div className="flex h-full flex-col rounded-lg bg-[#f9f6fb] dark:bg-neutral-800 p-4 text-[##312D3F  ]">
               <h2 className="mb-3 text-lg font-semibold text-center">
                 Recent Purchases
               </h2>
 
-              <div className="flex flex-col gap-3 overflow-y-auto no-scrollbar">
+              <div className="flex flex-col gap-3 overflow-y-auto no-scrollbar ">
                 {dashboardData.history?.length > 0 ? (
                   dashboardData.history.map((item) => (
                     <div
                       key={item._id}
-                      className="flex flex-col rounded-md bg-white/10 dark:bg-neutral-700 p-3"
+                      className="flex flex-col border rounded-md bg-[#fdfafd] dark:bg-neutral-700 p-4"
                     >
                       <div className="flex justify-between items-center">
-                        <p className="text-sm font-semibold">
+                        <p className="text-md uppercase font-bold">
                           {item.userId?.name || "Unknown User"}
                         </p>
-                        <span className="text-xs text-gray-300">
+                        <span className="text-xs text-[#312D3F]">
                           {formatTime(item.createdAt)}
                         </span>
                       </div>
 
-                      <p className="text-sm text-gray-200 dark:text-gray-300">
+                      <p className="text-sm text-[#312D3F] dark:text-gray-300">
                         Purchased{" "}
-                        <span className="font-medium">{item.planTitle}</span> (
+                        <span className="font-medium text-[#312D3F]">{item.planTitle}</span> (
                         {item.billingCycle})
                       </p>
 
-                      <p className="text-xs text-gray-300 mt-1">
+                      <p className="text-xs text-[#625561] mt-1">
                         Amount: ₹{item.pricePaid} • Status: {item.status}
                       </p>
                     </div>
                   ))
                 ) : (
-                  <div className="text-center text-sm text-gray-400">
+                  <div className="text-center text-sm text-[#625561]">
                     No recent purchases
                   </div>
                 )}
