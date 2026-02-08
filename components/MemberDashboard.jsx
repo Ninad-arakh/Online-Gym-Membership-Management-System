@@ -144,6 +144,65 @@ const MemberDashboard = ({ user }) => {
           </div>
         </div>
 
+        {membership?.trainerId && (
+          <div className="relative mt-6 overflow-hidden rounded-xl border border-gray-200 bg-gradient-to-br from-white via-gray-50 to-gray-100 p-5 shadow-md shadow-gray-200/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+            {/* subtle accent wash */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-yellow-200/20 via-transparent to-indigo-200/20" />
+
+            <div className="relative">
+              <h3 className="mb-4 text-lg font-semibold text-gray-900">
+                Assigned Trainer
+              </h3>
+
+              <div className="flex items-start gap-4">
+                {/* Avatar */}
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 text-lg font-bold text-white shadow-sm">
+                  {membership.trainerId.name.charAt(0)}
+                </div>
+
+                {/* Info */}
+                <div className="flex-1">
+                  <p className="text-base font-medium text-gray-900">
+                    {membership.trainerId.name}
+                  </p>
+
+                  <p className="text-sm text-gray-600">
+                    {membership.trainerId.experienceYears} yrs experience •{" "}
+                    {membership.trainerId.gender}
+                  </p>
+
+                  {membership.trainerId.isActive && (
+                    <span className="mt-1 inline-block rounded-md bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700">
+                      Active Trainer
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="my-4 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+
+              {/* Specializations */}
+              <div>
+                <p className="mb-2 text-xs uppercase tracking-widest text-gray-500">
+                  Specializations
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  {membership.trainerId.specialization.map((skill, index) => (
+                    <span
+                      key={index}
+                      className="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-700 shadow-sm"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Quick Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
@@ -181,7 +240,7 @@ const MemberDashboard = ({ user }) => {
 
         {/* Trainer Info */}
         {["pro", "elite"].includes(membership.planSlug) && (
-          <div className="rounded-3xl bg-white/70 backdrop-blur border border-black/5 p-6 shadow  shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" >
+          <div className="rounded-3xl bg-white/70 backdrop-blur border border-black/5 p-6 shadow  shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
             <h3 className="text-lg font-semibold text-[#312D3F] mb-2">
               Personal Trainer
             </h3>
