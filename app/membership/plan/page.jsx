@@ -21,7 +21,10 @@ const MembershipPlan = () => {
   const [editingPlanId, setEditingPlanId] = useState(null);
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => {setOpen(false); setEditOpen(false)}
+  const handleClose = () => {
+    setOpen(false);
+    setEditOpen(false);
+  };
 
   const [Form, setForm] = useState({
     title: "",
@@ -162,28 +165,28 @@ const MembershipPlan = () => {
     return <LoaderOne />;
   } else {
     return (
-      <div>
-        <Image
+      <div className="bg-linear-to-br from-[#f1f0f8] via-[#eeccf7]/40 to-[#ccecfd]">
+        {/* <Image
           src={bgImg}
           alt="background"
           className="w-full h-screen bg-cover absolute inset-0 -z-10"
-        />
+        /> */}
 
         <SidebarDemo user={user}>
           <div className="w-full flex flex-col gap-3 my-5">
             <div className="flex w-full justify-between  px-8">
-              <h2 className="text-white md:text-3xl text-xl  py-4">
+              <h2 className="text-[#312D3F] md:text-3xl text-xl  py-4">
                 Gym Membership Plans
               </h2>
 
               {user.role === "admin" && (
                 <button
                   onClick={handleOpen}
-                  className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800/60 rounded-lg group cursor-pointer "
+                  className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-[#312D3F] bg-linear-to-br from-[#e3f0f3] rounded-lg group cursor-pointer shadow-md hover:shadow-lg duration-300 transition-all ease-in-out"
                 >
-                  <span className="absolute w-0 h-0 transition-all duration-400 ease-out bg-[#F5C542]/90 rounded-full group-hover:w-full group-hover:h-56"></span>
-                  <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-linear-to-b from-transparent via-transparent to-gray-700"></span>
-                  <span className="relative text-xs md:text-sm group-hover:text-black transition-all duration-300 font-semibold">
+                  <span className="absolute w-0 h-0 transition-all duration-400 ease-out bg-linear-to-br from-[#b1e7f3] rounded-full group-hover:w-full group-hover:h-56"></span>
+                  {/* <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-linear-to-b from-transparent via-transparent to-gray-700"></span> */}
+                  <span className="relative text-xs md:text-sm group-hover:text-black transition-all duration-300 font-bold">
                     Add New Plan +
                   </span>
                 </button>

@@ -102,14 +102,15 @@ const MembershipPlans = ({ user, setEditOpen, setEditingPlan }) => {
           return (
             <div
               key={plan._id}
-              className=" text-white rounded-xl h-[60vh] max-h-screen flex flex-col justify-between gap-3 p-6 md:p-10 backdrop-blur-sm shadow-[0_16px_12px_8px_rgba(0,0,0,0.3)] bg-linear-to-br bg-[#002455]/70  duration-300 hover:backdrop-blur-xl overflow-scroll no-scrollbar"
+              className=" text-[#312D3F] rounded-xl h-[60vh] max-h-screen flex flex-col justify-between gap-3 p-6 md:p-10 bg-linear-to-br from-[#faf8fc] via-[#faf8fc] shadow-xl hover:shadow-2xl border to-[#f4ddf6]  duration-300 hover:backdrop-blur-xl overflow-scroll no-scrollbar"
             >
+              {/* shadow-[0_16px_12px_8px_rgba(0,0,0,0.3)] */}
               <div className="flex flex-col justify-between gap-3">
                 <div>
                   <h2 className="text-2xl uppercase">{plan.title}</h2>
-                  <h2 className="text-neutral-200">Membership</h2>
+                  <h2 className="text-[#625561]">Membership</h2>
                 </div>
-                <h1 className="text-4xl">₹ {plan.price} </h1>
+                <h1 className="text-4xl font-semibold">₹ {plan.price} </h1>
                 <h2>Duration : {plan.durationInDays} Days</h2>
 
                 <div className="w-full h-0.5 bg-linear-to-r from-gray-400/2 via-gray-400/30 to-gray-400/2mt-5"></div>
@@ -131,21 +132,16 @@ const MembershipPlans = ({ user, setEditOpen, setEditingPlan }) => {
 
               <div className="flex gap-2 justify-around">
                 {user.role === "admin" ? (
-                  // <button className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-green-400/60 rounded-lg group cursor-pointer ">
-                  //   <span className="absolute w-0 h-0 transition-all duration-400 ease-out bg-[#F5C542]/90 rounded-full group-hover:w-full group-hover:h-56"></span>
-                  //   <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-linear-to-b from-transparent via-transparent to-gray-700"></span>
-                  //   <span className="relative">Edit</span>
-                  // </button>
                   <>
                     <button
                       onClick={() => {
                         setEditingPlan(plan);
                         setEditOpen(true);
                       }}
-                      className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-green-400/60 rounded-lg group cursor-pointer "
+                      className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-[#312D3F] border bg-linear-to-br from-[#f4ddf6] rounded-lg group cursor-pointer  shadow-md hover:shadow-xl"
                     >
-                      <span className="absolute w-0 h-0 transition-all duration-400 ease-out bg-[#F5C542]/90 rounded-full group-hover:w-full group-hover:h-56"></span>
-                      <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-linear-to-b from-transparent via-transparent to-gray-700"></span>
+                      <span className="absolute w-0 h-0 transition-all duration-400 ease-out bg-linear-to-br from-[#c3affd] to-[#faecf6] rounded-full group-hover:w-full group-hover:h-56"></span>
+                      {/* <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-linear-to-b from-transparent via-transparent to-gray-700"></span> */}
                       <span className="relative flex gap-3">
                         Edit <IconPencil />
                       </span>
@@ -153,10 +149,9 @@ const MembershipPlans = ({ user, setEditOpen, setEditingPlan }) => {
 
                     <button
                       onClick={() => handleDelete(plan._id)}
-                      className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-400/60 rounded-lg group cursor-pointer"
+                      className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-[#312D3F] bg-linear-to-br  from-[#fddade] rounded-lg group cursor-pointer shadow-md hover:shadow-xl"
                     >
-                      <span className="absolute w-0 h-0 transition-all duration-400 ease-out bg-red-500/90 rounded-full group-hover:w-full group-hover:h-56"></span>
-                      <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-linear-to-b from-transparent via-transparent to-gray-700"></span>
+                      <span className="absolute w-0 h-0 transition-all duration-400 ease-out bg-linear-to-br from-[#e3627d] rounded-full group-hover:w-full group-hover:h-56"></span>
                       <span className="relative flex gap-3">
                         Delete <IconTrash />
                       </span>
