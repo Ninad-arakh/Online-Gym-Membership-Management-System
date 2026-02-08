@@ -37,12 +37,12 @@ export default function ExpandableCardDemo({ cards, isRequestTrainers = true }) 
             <motion.div
               layoutId={`card-${active.title}-${id}`}
               ref={ref}
-              className="w-full max-w-xl rounded-3xl bg-neutral-900 text-white shadow-2xl overflow-hidden"
+              className="w-full max-w-xl rounded-3xl bg-linear-to-br from-[#e9f0f9] via-[#f4f3f9] to-[#dad6fc] text-[#312D3F] shadow-2xl overflow-hidden"
             >
               {/* Header */}
               <div className="p-6 border-b border-white/10">
                 <h2 className="text-2xl font-bold uppercase">{active.title}</h2>
-                <p className="text-sm text-neutral-400">
+                <p className="text-sm text-[#312D3F]">
                   {active.description}
                 </p>
               </div>
@@ -76,7 +76,7 @@ export default function ExpandableCardDemo({ cards, isRequestTrainers = true }) 
             className="cursor-pointer rounded-xl bg-white/5 hover:bg-white/10 transition p-4 flex justify-between items-center"
           >
             <div>
-              <h3 className="font-semibold text-white uppercase text-3xl">{card.title}</h3>
+              <h3 className="font-semibold text-[#312D3F] uppercase text-3xl">{card.title}</h3>
               <p className="text-sm text-neutral-400 md:text-xl">{card.description}</p>
             </div>
 
