@@ -58,7 +58,7 @@ const GetPersonalTrainer = () => {
           Select Personal Trainer
         </h1>
 
-        <TrainerTable trainers={trainer} onAssign={assignTrainer} />
+        <TrainerTable trainers={trainer} onAssign={assignTrainer} user={user} />
       </div>
     </SidebarDemo>
   );

@@ -5,6 +5,7 @@ import Payment from "@/models/Payment";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import Trainer from "@/models/Trainer";
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -29,6 +30,7 @@ export async function GET() {
 
     const totalUsers = await User.countDocuments({ role: "user" });
     const totalAdmins = await User.countDocuments({ role: "admin" });
+    const totalTrainers = await Trainer.countDocuments()
 
     const activeMemberships = await Membership.countDocuments({
       status: "active",
@@ -212,7 +214,7 @@ export async function GET() {
 
       stats: {
         totalUsers,
-        totalAdmins,
+        totalTrainers,
         activeMemberships,
         expiredMemberships,
         trialUsers,

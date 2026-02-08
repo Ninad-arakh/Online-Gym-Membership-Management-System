@@ -1,6 +1,7 @@
 "use client";
 import { SidebarDemo } from "@/components/Sidebar-Demo";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useLayoutEffect, useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -77,13 +78,23 @@ const ManageTrainers = () => {
     <SidebarDemo user={user}>
       <div className="min-h-full p-4 sm:p-6 space-y-8 rounded-tl-2xl bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-50">
         {/* Header */}
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-800">
-            Manage Trainers
-          </h1>
-          <p className="text-sm text-slate-500 mt-1">
-            Enable or disable trainers available for members
-          </p>
+        {/* Header */}
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight text-slate-800">
+              Manage Trainers
+            </h1>
+            <p className="text-sm text-slate-500 mt-1">
+              Enable or disable trainers available for members
+            </p>
+          </div>
+
+          <Link
+            href="/admin/trainers/new"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md hover:shadow-lg hover:brightness-110 active:scale-[0.97] transition-all"
+          >
+            + Add Trainer
+          </Link>
         </div>
 
         {/* Content */}

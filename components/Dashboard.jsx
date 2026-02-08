@@ -114,9 +114,9 @@ const Dashboard = () => {
           </div>
 
           <div className="py-2 px-3 w-full text rounded-lg bg-linear-to-br from-[#fee2da] border shadow-lg dark:bg-neutral-800 ">
-            <h2 className="font-semibold text-xl  text-center md:text-left">Total admins</h2>
+            <h2 className="font-semibold text-xl  text-center md:text-left">Total Trainers</h2>
             <h1 className="font-bold text-3xl text-center md:text-left">
-              {stats.totalAdmins}
+              {stats.totalTrainers}
             </h1>
           </div>
         </div>
