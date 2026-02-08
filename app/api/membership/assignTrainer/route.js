@@ -32,12 +32,12 @@ export async function POST(req) {
     );
   }
 
-  if (!["pro", "elite"].includes(membership.planSlug)) {
-    return NextResponse.json(
-      { message: "Plan does not allow trainer" },
-      { status: 403 },
-    );
-  }
+  // if (!["pro", "elite"].includes(membership.planSlug)) {
+  //   return NextResponse.json(
+  //     { message: "Plan does not allow trainer" },
+  //     { status: 403 },
+  //   );
+  // }
 
   const trainer = await Trainer.findById(trainerId);
   if (!trainer || !trainer.isActive) {

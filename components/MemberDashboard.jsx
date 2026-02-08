@@ -22,6 +22,7 @@ const MemberDashboard = ({ user }) => {
           withCredentials: true,
         });
         setMembership(data.membership);
+        console.log(data.membership);
       } catch (err) {
         console.error("error : ", err);
         setMembership(null);

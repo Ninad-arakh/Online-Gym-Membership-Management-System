@@ -4,10 +4,8 @@ import MemberDashboard from "@/components/MemberDashboard";
 import { SidebarDemo } from "@/components/Sidebar-Demo";
 import { LoaderOne } from "@/components/ui/loader";
 import axios from "axios";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import bgImg from "@/public/bgImg2.jpg";
 
 const MainPage = () => {
   const [user, setUser] = useState(null);
