@@ -13,46 +13,32 @@ const MembershipPlans = ({ user, setEditOpen, setEditingPlan }) => {
       amount,
       currency,
       order_id: orderId,
-
       name: "Online Gym",
       description: "Membership Purchase",
-
       handler: async function (response) {
         try {
-          const paymentResponse = await axios.post(
-            "/api/payment/verify",
-            response,
-          );
+          await axios.post("/api/payment/verify", response);
           window.location.href = "/getPersonalTrainer";
         } catch (err) {
-          console.log(err);
           toast.error("Payment verification failed");
         }
       },
-
-      theme: {
-        color: "#0f172a",
-      },
+      theme: { color: "#312D3F" },
     };
 
-    if (typeof window === "undefined" || !window.Razorpay) {
+    if (!window?.Razorpay) {
       toast.error("Payment system loading, please try again.");
       return;
     }
 
-    const rzp = new window.Razorpay(options);
-    rzp.open();
+    new window.Razorpay(options).open();
   }
 
   const handlePayment = async (planId) => {
     try {
       const res = await axios.post("/api/payment", { planId });
-
-      const { key, orderId, amount, currency } = res.data;
-
-      openRazorpayCheckout({ key, orderId, amount, currency });
+      openRazorpayCheckout(res.data);
     } catch (err) {
-      console.error(err);
       toast.error(err.response?.data?.message || "Payment failed");
     }
   };
@@ -64,7 +50,6 @@ const MembershipPlans = ({ user, setEditOpen, setEditingPlan }) => {
       await axios.delete(`/api/admin/plans/${planId}`, {
         withCredentials: true,
       });
-
       toast.success("Plan deleted successfully");
       setMembershipDetails((prev) => prev.filter((p) => p._id !== planId));
     } catch (err) {
@@ -72,105 +57,130 @@ const MembershipPlans = ({ user, setEditOpen, setEditingPlan }) => {
     }
   };
 
-  const getDetails = async () => {
-    try {
-      const response = await axios.get("/api/plans", {
-        withCredentials: true,
-      });
-      // assuming API returns { plans: [...] }
-      if (response.status === 200) {
-        setMembershipDetails(response.data);
-      }
-    } catch (err) {
-      console.log("Error fetching plans:", err);
-    }
-  };
   useEffect(() => {
-    if (membershipDetails.length === 0) getDetails();
+    if (membershipDetails.length === 0) {
+      axios
+        .get("/api/plans", { withCredentials: true })
+        .then((res) => setMembershipDetails(res.data))
+        .catch(() => {});
+    }
   }, []);
 
-  if (membershipDetails.length === 0) {
-    return null;
-  }
+  if (membershipDetails.length === 0) return null;
 
   return (
-    <div className="w-full grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 px-8 md:px-18 lg:px-28 gap-10 items-center overflow-y-scroll no-scrollbar h-full relative">
+    <div className="w-full min-h-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-8 md:px-18 lg:px-28 gap-10 sm:-mt-25  items-center">
       {membershipDetails
-        .filter((plan) => plan.isActive === true)
+        .filter((p) => p.isActive)
         .sort((a, b) => a.price - b.price)
-        .map((plan) => {
-          return (
-            <div
-              key={plan._id}
-              className=" text-[#312D3F] rounded-xl h-[60vh] max-h-screen flex flex-col justify-between gap-3 p-6 md:p-10 bg-linear-to-br from-[#faf8fc] via-[#faf8fc] shadow-xl hover:shadow-2xl border to-[#f4ddf6]  duration-300 hover:backdrop-blur-xl overflow-scroll no-scrollbar"
-            >
-              {/* shadow-[0_16px_12px_8px_rgba(0,0,0,0.3)] */}
-              <div className="flex flex-col justify-between gap-3">
-                <div>
-                  <h2 className="text-2xl uppercase">{plan.title}</h2>
-                  <h2 className="text-[#625561]">Membership</h2>
-                </div>
-                <h1 className="text-4xl font-semibold">₹ {plan.price} </h1>
-                <h2>Duration : {plan.durationInDays} Days</h2>
+        .map((plan) => (
+          <div
+            key={plan._id}
+            className="
+              group relative rounded-2xl h-[60vh] flex flex-col justify-between
+              p-6 md:p-10
+              bg-linear-to-br from-[#faf8fc] via-[#f6f3fb] to-[#cab5ff]
+              border border-black/5
+              shadow-[0_10px_30px_rgba(0,0,0,0.08)]
+              transition-all duration-500 ease-out
+              hover:-translate-y-2 hover:scale-[1.015]
+              hover:shadow-[0_25px_60px_rgba(0,0,0,0.12)]
+              overflow-hidden
+            "
+          >
+            {/* subtle glow */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-linear-to-br from-[#c3affd]/20 via-transparent to-[#fddade]/30 pointer-events-none" />
 
-                <div className="w-full h-0.5 bg-linear-to-r from-gray-400/2 via-gray-400/30 to-gray-400/2mt-5"></div>
-
-                <div className="flex flex-col gap-3">
-                  <p>{plan.description}</p>
-                  {plan.features.length > 0 && (
-                    <div>
-                      <h2 className="text-2xl">Features:</h2>
-                      <div className=" px-4">
-                        {plan.features.map((feature, indx) => (
-                          <li key={indx}>{feature}</li>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
+            <div className="relative flex flex-col gap-4 overflow-y-auto no-scrollbar">
+              <div>
+                <h2 className="text-2xl uppercase tracking-wide text-[#312D3F]">
+                  {plan.title}
+                </h2>
+                <p className="text-sm text-[#6B657A]">Membership</p>
               </div>
 
-              <div className="flex gap-2 justify-around">
-                {user.role === "admin" ? (
-                  <>
-                    <button
-                      onClick={() => {
-                        setEditingPlan(plan);
-                        setEditOpen(true);
-                      }}
-                      className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-[#312D3F] border bg-linear-to-br from-[#f4ddf6] rounded-lg group cursor-pointer  shadow-md hover:shadow-xl"
-                    >
-                      <span className="absolute w-0 h-0 transition-all duration-400 ease-out bg-linear-to-br from-[#c3affd] to-[#faecf6] rounded-full group-hover:w-full group-hover:h-56"></span>
-                      {/* <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-linear-to-b from-transparent via-transparent to-gray-700"></span> */}
-                      <span className="relative flex gap-3">
-                        Edit <IconPencil />
-                      </span>
-                    </button>
+              <h1 className="text-4xl font-semibold text-[#312D3F]">
+                ₹ {plan.price}
+              </h1>
 
-                    <button
-                      onClick={() => handleDelete(plan._id)}
-                      className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-[#312D3F] bg-linear-to-br  from-[#fddade] rounded-lg group cursor-pointer shadow-md hover:shadow-xl"
-                    >
-                      <span className="absolute w-0 h-0 transition-all duration-400 ease-out bg-linear-to-br from-[#e3627d] rounded-full group-hover:w-full group-hover:h-56"></span>
-                      <span className="relative flex gap-3">
-                        Delete <IconTrash />
-                      </span>
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    onClick={() => handlePayment(plan._id)}
-                    className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-green-500/60 rounded-lg group cursor-pointer "
-                  >
-                    <span className="absolute w-0 h-0 transition-all duration-400 ease-out bg-[#F5C542]/90 rounded-full group-hover:w-full group-hover:h-56"></span>
-                    <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-linear-to-b from-transparent via-transparent to-gray-700"></span>
-                    <span className="relative">Buy Now</span>
-                  </button>
+              <p className="text-sm text-[#6B657A]">
+                Duration: {plan.durationInDays} Days
+              </p>
+
+              <div className="w-full h-px bg-linear-to-r from-transparent via-black/20 to-transparent my-2 transition-opacity group-hover:opacity-60" />
+
+              <div className="flex flex-col gap-3 text-[#4A4658]">
+                <p>{plan.description}</p>
+
+                {plan.features.length > 0 && (
+                  <div>
+                    <h3 className="text-lg font-medium text-[#312D3F]">
+                      Features
+                    </h3>
+                    <ul className="pl-4 list-disc space-y-1 text-sm">
+                      {plan.features.map((f, i) => (
+                        <li key={i}>{f}</li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </div>
             </div>
-          );
-        })}
+
+            <div className="relative mt-6 flex gap-3 justify-around">
+              {user.role === "admin" ? (
+                <>
+                  <button
+                    onClick={() => {
+                      setEditingPlan(plan);
+                      setEditOpen(true);
+                    }}
+                    className="
+                      px-8 py-3 rounded-lg font-medium
+                      bg-linear-to-br from-[#f4ddf6] to-[#e6dcff]
+                      text-[#312D3F]
+                      transition-all duration-300
+                      hover:shadow-lg hover:-translate-y-0.5
+                      hover:from-[#d8caff] hover:to-[#faecf6]
+                      flex items-center gap-2
+                    "
+                  >
+                    Edit <IconPencil size={18} />
+                  </button>
+
+                  <button
+                    onClick={() => handleDelete(plan._id)}
+                    className="
+                      px-8 py-3 rounded-lg font-medium
+                      bg-linear-to-br from-[#fddade] to-[#f9c2cb]
+                      text-[#312D3F]
+                      transition-all duration-300
+                      hover:shadow-lg hover:-translate-y-0.5
+                      hover:from-[#f9b1bd] hover:to-[#e3627d]
+                      flex items-center gap-2
+                    "
+                  >
+                    Delete <IconTrash size={18} />
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => handlePayment(plan._id)}
+                  className="
+                    w-full px-10 py-4 rounded-lg font-semibold
+                    bg-linear-to-br from-green-500 to-emerald-600
+                    text-white
+                    transition-all duration-300
+                    hover:shadow-xl hover:-translate-y-0.5
+                    hover:from-emerald-500 hover:to-green-600
+                  "
+                >
+                  Buy Now
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
     </div>
   );
 };

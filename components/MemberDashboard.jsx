@@ -93,7 +93,7 @@ const MemberDashboard = ({ user }) => {
 
         {/* Membership Card */}
         <div
-          className="hero-animate rounded-3xl bg-white/80 backdrop-blur-xl border border-black/5 shadow-xl p-8 bg-linear-to-br from-[#fdf1fc]
+          className="hero-animate rounded-3xl bg-white/80 backdrop-blur-xl border border-black/5 shadow-xl p-8 bg-linear-to-br from-[#fff9fe] via-[#fdf1fc] to-[#fee3da]/70
   transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
         >
           <div className="flex flex-col md:flex-row justify-between gap-8">
@@ -153,7 +153,7 @@ const MemberDashboard = ({ user }) => {
           ].map(([label, value], i) => (
             <div
               key={i}
-              className="card-animate rounded-2xl bg-linear-to-br from-[#fcf7f5] backdrop-blur border border-black/5 p-5 text-center shadow-xl
+              className="card-animate rounded-2xl bg-linear-to-br from-[#fcf7f5] via-[#fdf1fc] to-[#fdf1fc] backdrop-blur border border-black/5 p-5 text-center shadow-xl
   transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:scale-[1.02]"
             >
               <p className="text-sm text-[#6B657A]">{label}</p>
@@ -163,7 +163,7 @@ const MemberDashboard = ({ user }) => {
         </div>
 
         {/* What You Get */}
-        <div className="rounded-3xl bg-white/70 backdrop-blur border border-black/5 p-8 shadow-md">
+        <div className="rounded-3xl bg-white/70 backdrop-blur border border-black/5 p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
           <h3 className="text-xl font-semibold text-[#312D3F] mb-4">
             Your Membership Includes
           </h3>
@@ -180,7 +180,7 @@ const MemberDashboard = ({ user }) => {
 
         {/* Trainer Info */}
         {["pro", "elite"].includes(membership.planSlug) && (
-          <div className="rounded-3xl bg-white/70 backdrop-blur border border-black/5 p-6 shadow">
+          <div className="rounded-3xl bg-white/70 backdrop-blur border border-black/5 p-6 shadow  shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" >
             <h3 className="text-lg font-semibold text-[#312D3F] mb-2">
               Personal Trainer
             </h3>
@@ -198,7 +198,7 @@ const MemberDashboard = ({ user }) => {
         )}
 
         {/* Guidance */}
-        <div className="rounded-3xl bg-linear-to-br border-2 border-white/50 from-[#f1f0f8] via-[#eeccf7]/30 to-[#fccbc0]/30 p-10">
+        <div className="rounded-3xl bg-linear-to-br border-2 border-white/50 from-[#f1f0f8] via-[#eeccf7]/30 to-[#fccbc0]/30 p-10  shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
           <h3 className="text-xl font-semibold text-[#312D3F] mb-3">
             Training Guidance
           </h3>
@@ -210,7 +210,7 @@ const MemberDashboard = ({ user }) => {
         </div>
 
         {/* Next Steps */}
-        <div className="rounded-3xl bg-white/80 backdrop-blur border border-black/5 p-8 shadow">
+        <div className="rounded-3xl bg-white/80 backdrop-blur border border-black/5 p-8  shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
           <h3 className="text-xl font-semibold text-[#312D3F] mb-4">
             Recommended Next Steps
           </h3>
@@ -224,7 +224,7 @@ const MemberDashboard = ({ user }) => {
         </div>
 
         {/* ===================== WEEKLY STRUCTURE ===================== */}
-        <div className="rounded-3xl bg-white/70 backdrop-blur border border-black/5 p-10 shadow">
+        <div className="rounded-3xl bg-white/70 backdrop-blur border border-black/5 p-10  shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
           <h3 className="text-2xl font-semibold text-[#312D3F] mb-6">
             Suggested Weekly Training Structure
           </h3>
@@ -265,7 +265,7 @@ const MemberDashboard = ({ user }) => {
         </div>
 
         {/* ===================== TRAINING PHILOSOPHY ===================== */}
-        <div className="rounded-3xl bg-linear-to-br border-2 border-white/50 from-[#f1f0f8] via-[#eeccf7]/30 to-[#fccbc0]/30 p-10">
+        <div className="rounded-3xl bg-linear-to-br border-2 border-white/50 from-[#f1f0f8] via-[#eeccf7]/30 to-[#fccbc0]/30 p-10  shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
           <h3 className="text-2xl font-semibold text-[#312D3F] mb-4">
             Training Philosophy
           </h3>
@@ -281,7 +281,7 @@ const MemberDashboard = ({ user }) => {
         </div>
 
         {/* ===================== GYM ETIQUETTE ===================== */}
-        <div className="rounded-3xl bg-white/80 backdrop-blur border border-black/5 p-10 shadow">
+        <div className="rounded-3xl bg-white/80 backdrop-blur border border-black/5 p-10  shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
           <h3 className="text-2xl font-semibold text-[#312D3F] mb-6">
             Gym Etiquette & Expectations
           </h3>
@@ -296,7 +296,7 @@ const MemberDashboard = ({ user }) => {
         </div>
 
         {/* ===================== RECOVERY & NUTRITION ===================== */}
-        <div className="rounded-3xl bg-white/70 backdrop-blur border border-black/5 p-10 shadow">
+        <div className="rounded-3xl bg-white/70 backdrop-blur border border-black/5 p-10  shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
           <h3 className="text-2xl font-semibold text-[#312D3F] mb-4">
             Recovery & Nutrition Basics
           </h3>
@@ -315,7 +315,7 @@ const MemberDashboard = ({ user }) => {
         </div>
 
         {/* ===================== FAQs ===================== */}
-        <div className="rounded-3xl bg-white/80 backdrop-blur border border-black/5 p-10 shadow">
+        <div className="rounded-3xl bg-white/80 backdrop-blur border border-black/5 p-10  shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
           <h3 className="text-2xl font-semibold text-[#312D3F] mb-6">
             Frequently Asked Questions
           </h3>

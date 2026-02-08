@@ -173,7 +173,7 @@ const MembershipPlan = () => {
         /> */}
 
         <SidebarDemo user={user}>
-          <div className="w-full flex flex-col gap-3 my-5">
+          <div className="w-full flex flex-col gap-3 my-5 overflow-y-scroll no-scrollbar">
             <div className="flex w-full justify-between  px-8">
               <h2 className="text-[#312D3F] md:text-3xl text-xl  py-4">
                 Gym Membership Plans
