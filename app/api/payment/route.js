@@ -4,6 +4,7 @@ import { connectDB } from "@/lib/db";
 import Plan from "@/models/Plan";
 import Payment from "@/models/Payment";
 import { getUserFromCookies } from "@/lib/auth";
+import Membership from "@/models/Membership";
 
 export async function POST(req) {
   const user = getUserFromCookies();
@@ -17,6 +18,11 @@ export async function POST(req) {
   const plan = await Plan.findById(planId);
   if (!plan) {
     return NextResponse.json({ message: "Plan not found" }, { status: 404 });
+  }
+
+  const AlreadyMembershipExist = await Membership.find({userId : user._id})
+  if(AlreadyMembershipExist.length !== 0){
+     return NextResponse.json({ message: "You Already have a membership Ongoing!" }, { status: 404 });
   }
 
   // FREE PLAN → no Razorpay

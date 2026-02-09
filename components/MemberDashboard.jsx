@@ -22,7 +22,6 @@ const MemberDashboard = ({ user }) => {
           withCredentials: true,
         });
         setMembership(data.membership);
-        console.log(data.membership);
       } catch (err) {
         console.error("error : ", err);
         setMembership(null);
@@ -76,10 +75,33 @@ const MemberDashboard = ({ user }) => {
   const isActive = membership.status === "active";
   const isTrial = membership.isTrial;
 
+
+  const membershipStyles = {
+    basic: {
+      wrapper: "bg-slate-100 border border-slate-300 text-slate-600",
+      glow: "",
+      label: "B",
+    },
+    pro: {
+      wrapper:
+        "bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white",
+      glow: "shadow-[0_0_20px_rgba(168,85,247,0.6)]",
+      label: "P",
+    },
+    elite: {
+      wrapper:
+        "bg-gradient-to-br from-neutral-900 to-black text-yellow-400 border border-yellow-400/40",
+      glow: "shadow-[0_0_30px_rgba(234,179,8,0.7)]",
+      label: "E",
+    },
+  };
+
+  const style = membershipStyles[membership.planSlug] ?? membershipStyles.basic;
+
   return (
     <div
       ref={containerRef}
-      className="w-full mx-auto flex flex-col gap-12 pt-12 pb-20 overflow-y-scroll bg-linear-to-br from-[#f9e9f4] to-[#d5e6fc]"
+      className="w-full mx-auto flex flex-col gap-12 pt-12 pb-20 overflow-y-scroll no-scrollbar bg-linear-to-br from-[#f9e9f4] to-[#d5e6fc] relative"
     >
       <div className="w-full mx-2 flex flex-col gap-12 sm:max-w-7xl sm:mx-auto">
         {/* Greeting */}
@@ -419,6 +441,20 @@ const MemberDashboard = ({ user }) => {
             someone who trains. Everything else follows.
           </p>
         </div>
+      </div>
+
+      <div
+        className={`
+      fixed md:top-10 top-12 md:right-5 right-2
+       h-10 rounded-xl
+      flex items-center justify-center
+      backdrop-blur-md
+      transition-all duration-300
+      ${style.wrapper}
+      ${style.glow}
+    `}
+      >
+        <span className="text-sm font-bold tracking-wide uppercase px-2">{membership.planSlug}</span>
       </div>
     </div>
   );
