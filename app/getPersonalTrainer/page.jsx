@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import ExpandableCardDemo from "@/components/expandable-card-demo-standard";
 import { toast } from "sonner";
 import TrainerTable from "@/components/trainer-table";
+import UpdateModal from "@/components/UpdateModal";
 
 const GetPersonalTrainer = () => {
   const [user, setUser] = useState(null);
@@ -53,6 +54,7 @@ const GetPersonalTrainer = () => {
 
   return (
     <SidebarDemo user={user}>
+      <UpdateModal />
       <div className="h-full w-full rounded-tl-2xl bg-linear-to-br from-[#f8fafc] via-[#f1f5f9] to-[#eef2ff] p-6 md:p-10">
         <h1 className="mb-6 text-3xl font-bold text-slate-800">
           Select Personal Trainer

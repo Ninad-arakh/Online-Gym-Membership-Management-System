@@ -11,6 +11,7 @@ import { LabelInputContainer } from "@/components/Signup-form-demo";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import UpdateModal from "@/components/UpdateModal";
 
 const MembershipPlan = () => {
   const [user, setUser] = useState(null);
@@ -166,6 +167,7 @@ const MembershipPlan = () => {
   } else {
     return (
       <div className="bg-linear-to-br from-[#f1f0f8] via-[#eeccf7]/40 to-[#ccecfd]">
+        <UpdateModal />
         {/* <Image
           src={bgImg}
           alt="background"

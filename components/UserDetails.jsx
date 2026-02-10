@@ -2,12 +2,14 @@
 import { motion, AnimatePresence } from "motion/react";
 import React, { useState } from "react";
 import dayjs from "dayjs";
+import UpdateModal from "./UpdateModal";
 
 export default function AdminUsersTable({ users }) {
   const [openId, setOpenId] = useState(null);
 
   return (
     <div className="overflow-hidden rounded-2xl bg-white/80 backdrop-blur shadow-xl border border-slate-200">
+      <UpdateModal />
       <table className="w-full text-left">
         {/* Header */}
         <thead className="bg-linear-to-r from-slate-50 to-slate-100 text-slate-600 text-sm">

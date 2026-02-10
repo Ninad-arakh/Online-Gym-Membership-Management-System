@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import UpdateModal from "./UpdateModal";
 
 const DEFAULT_SPECIALIZATIONS = [
   "Weight Training",
@@ -91,6 +92,7 @@ const CreateNewTrainerComponent = () => {
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-linear-to-br from-slate-50 via-indigo-50 to-purple-50 px-4">
+      <UpdateModal />
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-xl rounded-2xl border border-slate-200 bg-linear-to-br from-[#faf8fc] via-[#f6f3fb] to-[#cab5ff] p-6 md:p-8 shadow-xl space-y-6"

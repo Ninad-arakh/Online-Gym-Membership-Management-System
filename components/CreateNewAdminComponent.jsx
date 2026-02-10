@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import UpdateModal from "./UpdateModal";
 
 const CreateNewAdminComponent = () => {
   const [adminForm, setAdminForm] = useState({
@@ -47,6 +48,7 @@ const CreateNewAdminComponent = () => {
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-linear-to-br from-black via-red-600/70 to-black px-4">
+      <UpdateModal />
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-xl rounded-2xl bg-neutral-900 p-6 md:p-8 shadow-2xl space-y-6"

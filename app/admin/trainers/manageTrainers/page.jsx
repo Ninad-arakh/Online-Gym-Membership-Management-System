@@ -1,5 +1,6 @@
 "use client";
 import { SidebarDemo } from "@/components/Sidebar-Demo";
+import UpdateModal from "@/components/UpdateModal";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -77,6 +78,7 @@ const ManageTrainers = () => {
   return (
     <SidebarDemo user={user}>
       <div className="min-h-full p-4 sm:p-6 space-y-8 rounded-tl-2xl bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-50">
+        <UpdateModal />
         {/* Header */}
         {/* Header */}
         <div className="flex items-start justify-between gap-4">

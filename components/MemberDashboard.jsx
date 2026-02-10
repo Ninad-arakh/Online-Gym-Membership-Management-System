@@ -6,6 +6,7 @@ import Cards from "./Cards";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import UpdateModal from "./UpdateModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,7 +76,6 @@ const MemberDashboard = ({ user }) => {
   const isActive = membership.status === "active";
   const isTrial = membership.isTrial;
 
-
   const membershipStyles = {
     basic: {
       wrapper: "bg-slate-100 border border-slate-300 text-slate-600",
@@ -103,6 +103,8 @@ const MemberDashboard = ({ user }) => {
       ref={containerRef}
       className="w-full mx-auto flex flex-col gap-12 pt-12 pb-20 overflow-y-scroll no-scrollbar bg-linear-to-br from-[#f9e9f4] to-[#d5e6fc] relative"
     >
+      <UpdateModal />
+
       <div className="w-full mx-2 flex flex-col gap-12 sm:max-w-7xl sm:mx-auto">
         {/* Greeting */}
         <div className="text-center">
@@ -454,7 +456,9 @@ const MemberDashboard = ({ user }) => {
       ${style.glow}
     `}
       >
-        <span className="text-sm font-bold tracking-wide uppercase px-2">{membership.planSlug}</span>
+        <span className="text-sm font-bold tracking-wide uppercase px-2">
+          {membership.planSlug}
+        </span>
       </div>
     </div>
   );

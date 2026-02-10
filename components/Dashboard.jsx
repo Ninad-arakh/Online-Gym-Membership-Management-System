@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import MembersGrowthChart from "./MembersGrowthChart";
 import { useRouter } from "next/navigation";
+import UpdateModal from "./UpdateModal";
 
 const formatTime = (date) => {
   return new Date(date).toLocaleString("en-IN", {
@@ -41,6 +42,7 @@ const Dashboard = () => {
   }
   return (
     <div className="flex flex-1 bg-[#fdfbfe] overflow-y-scroll no-scrollbar ">
+      <UpdateModal />
       <div className="flex min-h-full w-full flex-1 flex-col gap-4 rounded-tl-2xl p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900 relative mb-8">
         <h2 className="text-4xl text-[##312D3F] font-semibold tracking-tight">Admin Dashboard</h2>
         <div className="w-full flex flex-wrap gap-3 mb-2 justify-end">

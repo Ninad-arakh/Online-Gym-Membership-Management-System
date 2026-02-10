@@ -16,6 +16,7 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useModal } from "@/context/ModalContext";
 
 export function SidebarDemo({ user, children }) {
   const router = useRouter();
@@ -42,12 +43,16 @@ export function SidebarDemo({ user, children }) {
             icon: <IconHome className="h-5 w-5 shrink-0 text-[#312D3F]" />,
           },
         ]
-      : []),
-    {
-      label: "Dashboard",
-      href: "/admindashboard",
-      icon: <IconBrandTabler className="h-5 w-5 shrink-0 text-[#312D3F]" />,
-    },
+      : [
+          {
+            label: "Dashboard",
+            href: "/admindashboard",
+            icon: (
+              <IconBrandTabler className="h-5 w-5 shrink-0 text-[#312D3F]" />
+            ),
+          },
+        ]),
+    ,
     {
       label: "Membership Plans",
       href: "/membership/plan",
@@ -73,6 +78,8 @@ export function SidebarDemo({ user, children }) {
   // const filteredLinks = user?.role === "admin" ? links : links.slice(1);
   const [open, setOpen] = useState(false);
 
+  const { openModal } = useModal();
+
   return (
     <div
       className={cn(
@@ -95,6 +102,7 @@ export function SidebarDemo({ user, children }) {
           </div>
           <div>
             <SidebarLink
+              onClick={() => openModal()}
               link={{
                 label: user?.name,
                 href: "#",
